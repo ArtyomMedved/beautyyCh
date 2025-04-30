@@ -222,9 +222,9 @@ async function startServer() {
   try {
     await db.query("SELECT 1");
     console.log("✅ Подключение к базе данных прошло успешно.");
-    app.listen(PORT, () => {
+    app.listen(PORT, '0.0.0.0', () => {
       console.log(`🚀 Сервер работает: http://localhost:${PORT}`);
-    });
+    });    
   } catch (err) {
     console.error("❌ Ошибка подключения к базе данных:", err.message);
     process.exit(1);
