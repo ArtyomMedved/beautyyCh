@@ -10,7 +10,7 @@ const multer = require("multer");
 const { format } = require("date-fns-tz");
 
 const app = express();
-const PORT = 3000;
+const PORT = 80;
 
 // Настройка хранилища для аватаров
 const storage = multer.diskStorage({
