@@ -1,0 +1,777 @@
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>beautyyCh - Школа Маникюра</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Montserrat", sans-serif;
+        background-color: #fff1f3;
+        color: #831843;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+      }
+      header {
+        border-bottom: 1px solid #f9a8d4;
+        background-color: #ffe4ec;
+      }
+      header nav a {
+        color: #831843;
+        font-weight: 600;
+        font-size: 0.875rem;
+        transition: color 0.3s;
+        white-space: nowrap;
+      }
+      header nav a:hover {
+        color: #9d174d;
+      }
+      header a.phone,
+      header a.address {
+        color: #9d174d;
+        font-weight: 600;
+        transition: color 0.3s;
+        white-space: nowrap;
+      }
+      header a.phone:hover,
+      header a.address:hover {
+        color: #d9467a;
+      }
+      header .btn-login {
+        color: #9d174d;
+        font-weight: 600;
+        transition: color 0.3s;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+      header .btn-login:hover {
+        color: #d9467a;
+      }
+      header .btn-register {
+        background-color: #9d174d;
+        color: white;
+        font-weight: 600;
+        padding: 0.375rem 1rem;
+        border-radius: 0.375rem;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      header .btn-register:hover {
+        background-color: #be185d;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #831843;
+        margin: 0;
+      }
+      h1 {
+        font-weight: 600;
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+        margin-bottom: 0.75rem;
+      }
+      @media (min-width: 768px) {
+        h1 {
+          font-size: 2.25rem;
+          line-height: 2.5rem;
+        }
+      }
+      h2 {
+        font-weight: 600;
+        font-size: 1.25rem;
+        margin-bottom: 1.5rem;
+      }
+      h3 {
+        font-weight: 600;
+        font-size: 1.125rem;
+        margin-bottom: 0.5rem;
+      }
+      p {
+        color: #9d174d;
+        font-size: 1.125rem;
+        margin-bottom: 1.5rem;
+      }
+      .btn-primary {
+        background-color: #9d174d;
+        color: white;
+        font-weight: 600;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.375rem;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      .btn-primary:hover {
+        background-color: #be185d;
+      }
+      .btn-secondary {
+        border: 2px solid #9d174d;
+        color: #9d174d;
+        font-weight: 600;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.375rem;
+        background: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      .btn-secondary:hover {
+        background-color: #ffe4ec;
+      }
+      .info-icons {
+        color: #9d174d;
+        font-size: 0.875rem;
+      }
+      .info-icons i {
+        margin-right: 0.75rem;
+        margin-top: 0.25rem;
+      }
+      .course-card {
+        border: 1px solid #f9a8d4;
+        border-radius: 0.5rem;
+        background-color: #fff0f6;
+        box-shadow: 0 1px 3px rgba(157, 23, 77, 0.1);
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+      .course-card img {
+        width: 100%;
+        height: 11rem;
+        object-fit: cover;
+        display: block;
+      }
+      .course-card-content {
+        padding: 1.25rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      .course-card-content h3 {
+        color: #831843;
+        font-weight: 600;
+        font-size: 1.125rem;
+        margin-bottom: 0.5rem;
+      }
+      .course-card-content p {
+        color: #9d174d;
+        font-size: 0.875rem;
+        margin-bottom: 1rem;
+        flex-grow: 1;
+      }
+      .course-card-content .price {
+        color: #f43f5e;
+        font-weight: 700;
+        font-size: 1.125rem;
+        margin-bottom: 1rem;
+      }
+      .course-card-content .btn-group {
+        display: flex;
+        gap: 0.75rem;
+      }
+      .btn-enroll {
+        background-color: #9d174d;
+        color: white;
+        font-weight: 600;
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
+        border: none;
+        cursor: pointer;
+        flex: 1;
+        transition: background-color 0.3s;
+      }
+      .btn-enroll:hover {
+        background-color: #be185d;
+      }
+      .btn-program {
+        border: 2px solid #9d174d;
+        color: #9d174d;
+        font-weight: 600;
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
+        background: none;
+        cursor: pointer;
+        flex: 1;
+        transition: background-color 0.3s;
+      }
+      .btn-program:hover {
+        background-color: #ffe4ec;
+      }
+      .course-list-item {
+        border: 1px solid #f9a8d4;
+        border-radius: 0.5rem;
+        background-color: #fff0f6;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+      .course-list-item p {
+        color: #9d174d;
+        font-size: 0.875rem;
+        margin: 0.125rem 0;
+        word-break: break-word;
+      }
+      .course-list-item .title {
+        font-weight: 600;
+        color: #831843;
+        margin-bottom: 0.5rem;
+      }
+      .course-list-item .price {
+        color: #f43f5e;
+        font-weight: 700;
+        font-size: 1.125rem;
+      }
+      .course-list-item button {
+        background-color: #f43f5e;
+        color: white;
+        font-weight: 600;
+        padding: 0.5rem 1.25rem;
+        border-radius: 0.375rem;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        white-space: nowrap;
+      }
+      .course-list-item button:hover {
+        background-color: #be185d;
+      }
+      .show-more-btn {
+        color: #9d174d;
+        font-weight: 600;
+        cursor: pointer;
+        background: none;
+        border: none;
+        font-size: 1rem;
+        margin-top: 1.5rem;
+        transition: text-decoration 0.3s;
+      }
+      .show-more-btn:hover,
+      .show-more-btn:focus {
+        text-decoration: underline;
+      }
+      select {
+        border: 1px solid #f9a8d4;
+        border-radius: 0.375rem;
+        padding: 0.5rem 0.75rem;
+        color: #831843;
+        font-weight: 600;
+        font-size: 1rem;
+        outline-offset: 2px;
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+      select:focus {
+        outline: 2px solid #9d174d;
+        outline-offset: 2px;
+      }
+      .help-section {
+        background-color: #9d174d;
+        color: white;
+        border-radius: 0.5rem;
+        max-width: 48rem;
+        margin: 5rem auto 0;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        box-sizing: border-box;
+      }
+      @media (min-width: 640px) {
+        .help-section {
+          flex-direction: row;
+          align-items: center;
+          gap: 2rem;
+        }
+      }
+      .help-section h3 {
+        font-weight: 600;
+        font-size: 1.25rem;
+        margin: 0;
+      }
+      .help-section p {
+        font-size: 0.875rem;
+        margin: 0;
+        line-height: 1.5;
+      }
+      .help-section form {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        width: 100%;
+      }
+      .help-section input[type="text"],
+      .help-section input[type="tel"] {
+        flex: 1 1 150px;
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.375rem;
+        border: none;
+        font-size: 1rem;
+        color: #831843;
+        outline-offset: 2px;
+        box-sizing: border-box;
+        max-width: 100%;
+      }
+      .help-section input[type="text"]:focus,
+      .help-section input[type="tel"]:focus {
+        outline: 2px solid #f43f5e;
+      }
+      .help-section button {
+        background-color: #f43f5e;
+        color: white;
+        font-weight: 600;
+        padding: 0.5rem 1.5rem;
+        border-radius: 0.375rem;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        flex-shrink: 0;
+        white-space: nowrap;
+      }
+      .help-section button:hover {
+        background-color: #be185d;
+      }
+      main {
+        max-width: 100vw;
+        overflow-x: hidden;
+      }
+      section {
+        box-sizing: border-box;
+      }
+      /* Fix flex children to not overflow */
+      .flex > * {
+        min-width: 0;
+      }
+      /* Header flex fix: force nav and right side in one row */
+      .header-container {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+      }
+      .header-left {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        flex-shrink: 0;
+      }
+      .header-left nav {
+        display: flex;
+        gap: 1rem; /* или сколько тебе нужно */
+      }
+
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        flex-shrink: 0;
+      }
+      @media (max-width: 767px) {
+        .header-left nav {
+          display: none !important;
+        }
+        .header-right .desktop-auth {
+          display: none !important;
+        }
+        .header-right .mobile-auth {
+          display: flex !important;
+          gap: 0.5rem;
+        }
+      }
+      @media (min-width: 768px) {
+        .header-right .mobile-auth {
+          display: none !important;
+        }
+        .header-left nav {
+          display: flex !important;
+        }
+        .header-right .desktop-auth {
+          display: flex !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="header-container py-3">
+          <div class="header-left">
+            <a class="flex items-center space-x-2" href="#">
+              <img
+                alt="Логотип школы beautyyCh"
+                class="h-10 w-auto"
+                height="40"
+                src="https://storage.googleapis.com/a1aa/image/2676523a-fcdf-43bb-877a-218bba33b8ba.jpg"
+                width="120"
+              />
+              <span class="select-none text-2xl font-bold">beautyyCh</span>
+            </a>
+            <nav>
+              <a href="#"> О школе </a>
+              <a href="#"> Обучение </a>
+              <a href="#"> Расписание </a>
+            </nav>
+          </div>
+          <div class="header-right text-sm">
+            <a class="phone" href="tel: +79872298797"> +7 (987) 229 8797 </a>
+            <div
+              class="desktop-auth"
+              style="display: flex; gap: 1rem; align-items: center"
+            >
+              <a href="/login">
+                <button class="btn-login" type="button">Войти</button>
+              </a>
+              <a href="/register">
+                <button class="btn-register" type="button">Регистрация</button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 mb-20">
+      <section class="flex flex-col md:flex-row md:items-center md:space-x-12">
+        <div class="md:flex-1 max-w-md mx-auto md:mx-0">
+          <h1 class="text-5xl font-extrabold text-center mt-10">
+            <span class="block">ШКОЛА</span>
+            <span class="block">БЬЮТИ</span>
+            <br />
+          </h1>
+          <p>
+            Эффективное обучение с практикой на моделях и курс от лучших
+            мастеров маникюра
+          </p>
+          <div class="flex space-x-4 mb-8 flex-wrap">
+            <button class="btn-primary" type="button">Расписание</button>
+            <button class="btn-secondary" type="button">Все курсы</button>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-sm">
+            <div class="info-icons flex items-start">
+              <i class="fas fa-briefcase mt-1"></i>
+              <p>Практика на реальных клиентах, поддержка после обучения</p>
+            </div>
+            <div class="info-icons flex items-start">
+              <i class="fas fa-user-tie mt-1"></i>
+              <p>
+                100% выпускников – это практикующие мастера ногтевого сервиса
+              </p>
+            </div>
+            <div class="info-icons flex items-start">
+              <i class="fas fa-graduation-cap mt-1"></i>
+              <p>
+                Дипломы соответствуют требованиям рынка труда и дают право
+                работать
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="relative mt-10 md:mt-0 md:flex-1 max-w-md mx-auto md:mx-0">
+          <img
+            alt="Фото обучения маникюру с тремя женщинами, одна обучает двух других"
+            class="rounded-lg shadow-lg w-full h-auto object-cover"
+            height="400"
+            src="https://storage.googleapis.com/a1aa/image/53c5348a-909f-4f84-2e62-5c21e9aa5f80.jpg"
+            width="400"
+          />
+        </div>
+      </section>
+      <section class="mt-16 max-w-4xl mx-auto">
+        <h2>Ближайшие старты курсов школы маникюра:</h2>
+        <div class="space-y-4">
+          <div
+            class="course-list-item flex flex-col sm:flex-row sm:items-center sm:justify-between bg-pink-50"
+          >
+            <div class="mb-3 sm:mb-0">
+              <p class="title">Курсы бьюти</p>
+              <p>Старт: 15.05.2024, 3 месяца</p>
+              <p>Формат: очно</p>
+            </div>
+            <div class="flex items-center space-x-6">
+              <p class="price">6 300 ₽ / мес.</p>
+              <button type="button">Забронировать</button>
+            </div>
+          </div>
+          <div
+            class="course-list-item flex flex-col sm:flex-row sm:items-center sm:justify-between bg-pink-50"
+          >
+            <div class="mb-3 sm:mb-0">
+              <p class="title">Обучение на мастера ногтевого сервиса</p>
+              <p>Старт: 01.06.2024, 2 месяца</p>
+              <p>Формат: очно</p>
+            </div>
+            <div class="flex items-center space-x-6">
+              <p class="price">3 700 ₽ / мес.</p>
+              <button type="button">Забронировать</button>
+            </div>
+          </div>
+          <div
+            class="course-list-item flex flex-col sm:flex-row sm:items-center sm:justify-between bg-pink-50"
+          >
+            <div class="mb-3 sm:mb-0">
+              <p class="title">Курсы повышения квалификации</p>
+              <p>Старт: 10.06.2024, 1 месяц</p>
+              <p>Формат: очно</p>
+            </div>
+            <div class="flex items-center space-x-6">
+              <p class="price">9 200 ₽ / мес.</p>
+              <button type="button">Забронировать</button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="mt-20 max-w-7xl mx-auto">
+        <h2>Все программы обучения школы маникюра</h2>
+        <div
+          class="flex flex-col sm:flex-row sm:space-x-6 mb-8 space-y-4 sm:space-y-0 max-w-4xl mx-auto"
+        >
+          <select aria-label="Типовая программа">
+            <option>Бьюти</option>
+            <option>Программа 1</option>
+            <option>Программа 2</option>
+          </select>
+          <select aria-label="Цель обучения">
+            <option>Цель обучения</option>
+            <option>Цель 1</option>
+            <option>Цель 2</option>
+          </select>
+          <select aria-label="Длительность обучения">
+            <option>Длительность обучения</option>
+            <option>1 месяц</option>
+            <option>2 месяца</option>
+          </select>
+        </div>
+        <div
+          aria-label="Программы обучения"
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto"
+        >
+          <!-- Card 1 -->
+          <article class="course-card">
+            <img
+              alt="Фото мастера маникюра за работой с клиентом"
+              height="220"
+              src="https://storage.googleapis.com/a1aa/image/b524fbed-ceaf-4d6d-2b6b-c54e6d7192ea.jpg"
+              width="400"
+            />
+            <div class="course-card-content">
+              <h3>Мастер маникюра</h3>
+              <p>
+                Обучение базовым техникам маникюра, уходу за ногтями и кожи рук,
+                а также работе с инструментами.
+              </p>
+              <p class="price">3 700 ₽ / мес.</p>
+              <div class="btn-group">
+                <button class="btn-enroll" type="button">Записаться</button>
+                <button class="btn-program" type="button">
+                  Программа обучения
+                </button>
+              </div>
+            </div>
+          </article>
+          <!-- Card 2 -->
+          <article class="course-card">
+            <img
+              alt="Фото мастера универсала ногтевого сервиса с инструментами"
+              height="220"
+              src="https://storage.googleapis.com/a1aa/image/155cb3e0-b6c2-464e-021e-5e8778a690d3.jpg"
+              width="400"
+            />
+            <div class="course-card-content">
+              <h3>Мастер-универсал ногтевого сервиса</h3>
+              <p>
+                Комплексное обучение маникюру, педикюру, наращиванию ногтей и
+                дизайну.
+              </p>
+              <p class="price">5 000 ₽ / мес.</p>
+              <div class="btn-group">
+                <button class="btn-enroll" type="button">Записаться</button>
+                <button class="btn-program" type="button">
+                  Программа обучения
+                </button>
+              </div>
+            </div>
+          </article>
+          <!-- Card 3 -->
+          <article class="course-card">
+            <img
+              alt="Фото специалиста технологий ногтевого сервиса с инструментами"
+              height="220"
+              src="https://storage.googleapis.com/a1aa/image/e96a0052-b3fd-493e-5da7-2ac42816ef6f.jpg"
+              width="400"
+            />
+            <div class="course-card-content">
+              <h3>Специалист технологий ногтевого сервиса</h3>
+              <p>
+                Обучение современным технологиям и материалам в ногтевом
+                сервисе.
+              </p>
+              <p class="price">7 600 ₽ / мес.</p>
+              <div class="btn-group">
+                <button class="btn-enroll" type="button">Записаться</button>
+                <button class="btn-program" type="button">
+                  Программа обучения
+                </button>
+              </div>
+            </div>
+          </article>
+          <!-- Card 4 -->
+          <article class="course-card">
+            <img
+              alt="Фото курсов маникюра для начинающих с инструментами и моделями"
+              height="220"
+              src="https://storage.googleapis.com/a1aa/image/da1f0d22-390e-4fa4-b21e-7e0681d66f36.jpg"
+              width="400"
+            />
+            <div class="course-card-content">
+              <h3>Курсы маникюра для начинающих</h3>
+              <p>
+                Основы маникюра, уход за ногтями и кожи рук, базовые техники.
+              </p>
+              <p class="price">9 200 ₽</p>
+              <div class="btn-group">
+                <button class="btn-enroll" type="button">Записаться</button>
+                <button class="btn-program" type="button">
+                  Программа обучения
+                </button>
+              </div>
+            </div>
+          </article>
+          <!-- Card 5 -->
+          <article class="course-card">
+            <img
+              alt="Фото курсов повышения квалификации по маникюру с мастером и клиентом"
+              height="220"
+              src="https://storage.googleapis.com/a1aa/image/2c9a534f-eae9-4150-948e-b71398c92b01.jpg"
+              width="400"
+            />
+            <div class="course-card-content">
+              <h3>Курсы повышения квалификации по маникюру</h3>
+              <p>
+                Современные техники и тренды в маникюре, работа с новыми
+                материалами.
+              </p>
+              <p class="price">6 000 ₽</p>
+              <div class="btn-group">
+                <button class="btn-enroll" type="button">Записаться</button>
+                <button class="btn-program" type="button">
+                  Программа обучения
+                </button>
+              </div>
+            </div>
+          </article>
+          <!-- Card 6 -->
+          <article class="course-card">
+            <img
+              alt="Фото курсов дизайна ногтей с мастером и образцами дизайна"
+              height="220"
+              src="https://storage.googleapis.com/a1aa/image/fbdc558b-0cee-4c26-5c1a-22d40ec05653.jpg"
+              width="400"
+            />
+            <div class="course-card-content">
+              <h3>Курсы дизайна ногтей</h3>
+              <p>
+                Обучение современным техникам дизайна ногтей, включая роспись и
+                декор.
+              </p>
+              <p class="price">6 000 ₽</p>
+              <div class="btn-group">
+                <button class="btn-enroll" type="button">Записаться</button>
+                <button class="btn-program" type="button">
+                  Программа обучения
+                </button>
+              </div>
+            </div>
+          </article>
+          <!-- Card 7 -->
+          <article class="course-card">
+            <img
+              alt="Фото курсов педикюра с мастером и клиентом"
+              height="220"
+              src="https://storage.googleapis.com/a1aa/image/62128cd5-58e8-4065-6e7d-544f7606a360.jpg"
+              width="400"
+            />
+            <div class="course-card-content">
+              <h3>Курсы педикюра</h3>
+              <p>
+                Обучение профессиональному уходу за ногами и ногтями, аппаратным
+                и классическим педикюром.
+              </p>
+              <p class="price">6 300 ₽</p>
+              <div class="btn-group">
+                <button class="btn-enroll" type="button">Записаться</button>
+                <button class="btn-program" type="button">
+                  Программа обучения
+                </button>
+              </div>
+            </div>
+          </article>
+          <!-- Card 8 -->
+          <article class="course-card">
+            <img
+              alt="Фото курсов наращивания ногтей с мастером и клиентом"
+              height="220"
+              src="https://storage.googleapis.com/a1aa/image/123a6442-0107-4094-cab2-9d9e70974e69.jpg"
+              width="400"
+            />
+            <div class="course-card-content">
+              <h3>Курсы наращивания ногтей</h3>
+              <p>
+                Обучение техникам наращивания ногтей гелем и акрилом, коррекции
+                и дизайну.
+              </p>
+              <p class="price">7 200 ₽</p>
+              <div class="btn-group">
+                <button class="btn-enroll" type="button">Записаться</button>
+                <button class="btn-program" type="button">
+                  Программа обучения
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+      <section class="help-section">
+        <div>
+          <h3 style="color: #fff0f6;">НУЖНА ПОМОЩЬ В ПОДБОРЕ КУРСА?</h3>
+          <p style="color: #fff0f6;">
+            Обсудите ваши пожелания с карьерным консультантом. Наш эксперт в
+            индустрии красоты бесплатно поможет подобрать обучение, которое
+            соответствует вашим целям.
+          </p>
+        </div>
+        <form onsubmit="event.preventDefault()">
+          <input
+            aria-label="Ваше имя"
+            placeholder="Ваше имя"
+            required=""
+            type="text"
+          />
+          <input
+            aria-label="Ваш телефон"
+            pattern="\+7\s\d{3}\s\d{3}-\d{2}-\d{2}"
+            placeholder="+7 912 345-67-89"
+            required=""
+            type="tel"
+          />
+          <button type="submit">Записаться на консультацию</button>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>
