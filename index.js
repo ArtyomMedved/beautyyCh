@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 const crypto = require("crypto");
 const { sendCode } = require("./mailer");
 const multer = require("multer");
+const { format } = require("date-fns-tz");
 
 const app = express();
 const PORT = 3000;
@@ -31,6 +32,22 @@ const db = mysql.createPool({
   password: "AdminPass456!",
   database: "exampledb",
 });
+
+app.use((req, res, next) => {
+  const ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
+  const userAgent = req.headers["user-agent"];
+  const requestedPath = req.originalUrl;
+
+  // Форматируем дату по МСК
+  const moscowTime = format(new Date(), "yyyy-MM-dd HH:mm:ssXXX", {
+    timeZone: "Europe/Moscow",
+  });
+
+  const logEntry = `[${moscowTime}] IP: ${ip}, User-Agent: ${userAgent}, Путь: ${requestedPath}\n`;
+  fs.appendFile("user_actions.log", logEntry, () => {});
+  next();
+});
+
 
 // Middleware
 app.use(express.static("public"));
