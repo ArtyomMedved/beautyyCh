@@ -89,6 +89,7 @@ app.post("/register", upload.single("avatar"), async (req, res) => {
     await sendCode(email, code);
 
     // Перенаправляем на ввод кода подтверждения
+    fs.appendFile("user_actions.log", `[${new Date().toISOString()}] Регистрируется пользователь: ${email}\n`, () => {});
     res.redirect(
       `/auth_code?email=${encodeURIComponent(
         email
@@ -134,6 +135,7 @@ app.post("/login", async (req, res) => {
     await sendCode(email, code);
 
     // Перенаправляем на ввод кода подтверждения
+    fs.appendFile("user_actions.log", `[${new Date().toISOString()}] Попытка входа: ${email}\n`, () => {});
     res.redirect(
       `/auth_code?email=${encodeURIComponent(email)}&purpose=login`
     );
@@ -173,6 +175,7 @@ app.post("/verify-code", async (req, res) => {
       sameSite: "strict",
       maxAge: 604800000,
     });
+    fs.appendFile("user_actions.log", `[${new Date().toISOString()}] Успешная регистрация: ${email}\n`, () => {});
     return res.redirect("/");
   } else if (purpose === "login") {
     const [userRows] = await db.query("SELECT id FROM users WHERE email = ?", [
@@ -192,6 +195,7 @@ app.post("/verify-code", async (req, res) => {
       sameSite: "strict",
       maxAge: 604800000,
     });
+    fs.appendFile("user_actions.log", `[${new Date().toISOString()}] Успешный вход: ${email}\n`, () => {});
     return res.redirect("/");
   }
 });
