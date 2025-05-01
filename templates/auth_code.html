@@ -257,7 +257,8 @@
         });
     
         if (res.ok) {
-          window.location.href = "/";
+          const data = await res.json();
+          window.location.href = data.redirectTo;
         } else {
           alert("Неверный код");
         }

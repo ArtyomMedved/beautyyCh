@@ -10,8 +10,7 @@ const multer = require("multer");
 const { format } = require("date-fns-tz");
 
 const app = express();
-const PORT = 80;
-
+const PORT = 3000;
 
 // Настройка хранилища для аватаров
 const storage = multer.diskStorage({
@@ -48,7 +47,6 @@ app.use((req, res, next) => {
   fs.appendFile("user_actions.log", logEntry, () => {});
   next();
 });
-
 
 // Middleware
 app.use(express.static("public"));
@@ -107,7 +105,11 @@ app.post("/register", upload.single("avatar"), async (req, res) => {
     await sendCode(email, code);
 
     // Перенаправляем на ввод кода подтверждения
-    fs.appendFile("user_actions.log", `[${new Date().toISOString()}] Регистрируется пользователь: ${email}\n`, () => {});
+    fs.appendFile(
+      "user_actions.log",
+      `[${new Date().toISOString()}] Регистрируется пользователь: ${email}\n`,
+      () => {}
+    );
     res.redirect(
       `/auth_code?email=${encodeURIComponent(
         email
@@ -153,10 +155,12 @@ app.post("/login", async (req, res) => {
     await sendCode(email, code);
 
     // Перенаправляем на ввод кода подтверждения
-    fs.appendFile("user_actions.log", `[${new Date().toISOString()}] Попытка входа: ${email}\n`, () => {});
-    res.redirect(
-      `/auth_code?email=${encodeURIComponent(email)}&purpose=login`
+    fs.appendFile(
+      "user_actions.log",
+      `[${new Date().toISOString()}] Попытка входа: ${email}\n`,
+      () => {}
     );
+    res.redirect(`/auth_code?email=${encodeURIComponent(email)}&purpose=login`);
   } catch (error) {
     console.error("Ошибка при входе:", error);
     res.status(500).send("Ошибка сервера");
@@ -187,14 +191,21 @@ app.post("/verify-code", async (req, res) => {
       "INSERT INTO users (name, email, password, avatar, session_token) VALUES (?, ?, ?, ?, ?)",
       [name, email, hashedPassword, "avatars/default.jpg", sessionToken]
     );
+
     res.cookie("session", sessionToken, {
-      httpOnly: true,
-      secure: true,
+      httpOnly: true, // включить для безопасности
+      secure: false, // установить в true для использования HTTPS в продакшене
       sameSite: "strict",
-      maxAge: 604800000,
+      maxAge: 604800000, // 7 дней
     });
-    fs.appendFile("user_actions.log", `[${new Date().toISOString()}] Успешная регистрация: ${email}\n`, () => {});
-    return res.redirect("/profile");
+
+    fs.appendFile(
+      "user_actions.log",
+      `[${new Date().toISOString()}] Успешная регистрация: ${email}\n`,
+      () => {}
+    );
+
+    return res.json({ redirectTo: "/profile" });
   } else if (purpose === "login") {
     const [userRows] = await db.query("SELECT id FROM users WHERE email = ?", [
       email,
@@ -207,36 +218,77 @@ app.post("/verify-code", async (req, res) => {
       sessionToken,
       userRows[0].id,
     ]);
+
     res.cookie("session", sessionToken, {
-      httpOnly: true,
-      secure: true,
+      httpOnly: true, // включить для безопасности
+      secure: false, // установить в true для использования HTTPS в продакшене
       sameSite: "strict",
-      maxAge: 604800000,
+      maxAge: 604800000, // 7 дней
     });
-    fs.appendFile("user_actions.log", `[${new Date().toISOString()}] Успешный вход: ${email}\n`, () => {});
-    return res.redirect("/profile");
+
+    fs.appendFile(
+      "user_actions.log",
+      `[${new Date().toISOString()}] Успешный вход: ${email}\n`,
+      () => {}
+    );
+
+    return res.json({ redirectTo: "/profile" });
   }
 });
 
-// Защищённый маршрут профиля
-app.get("/profile", async (req, res) => {
-  const sessionToken = req.cookies.session;
-  if (!sessionToken) return res.status(401).send("Вы не авторизованы");
+app.get("/api/profile", async (req, res) => {
+  const token = req.cookies.session;
+
+  if (!token) {
+    return res.status(401).json({ error: "Не авторизован" });
+  }
 
   try {
     const [rows] = await db.query(
-      "SELECT id, name, email, avatar FROM users WHERE session_token = ?",
-      [sessionToken]
+      "SELECT name, email, avatar FROM users WHERE session_token = ?",
+      [token]
     );
-    if (rows.length === 0)
-      return res.status(401).send("Сессия недействительна");
+
+    if (rows.length === 0) {
+      return res.status(401).json({ error: "Сессия не найдена" });
+    }
 
     const user = rows[0];
-    res.json(user);
+    res.json(user); // JSON с name, email, avatar
   } catch (err) {
     console.error("Ошибка при получении профиля:", err);
-    res.status(500).send("Ошибка сервера");
+    res.status(500).json({ error: "Ошибка сервера" });
   }
+});
+
+app.post("/logout", async (req, res) => {
+  const token = req.cookies.session;
+
+  if (token) {
+    try {
+      // Удаляем токен из базы данных (обнуляем)
+      await db.query("UPDATE users SET session_token = NULL WHERE session_token = ?", [token]);
+
+      // Очищаем cookie
+      res.clearCookie("session", {
+        httpOnly: true,
+        secure: false, // true в продакшене с HTTPS
+        sameSite: "strict"
+      });
+
+      fs.appendFile(
+        "user_actions.log",
+        `[${new Date().toISOString()}] Выход из аккаунта, токен: ${token}\n`,
+        () => {}
+      );
+    } catch (err) {
+      console.error("Ошибка при выходе:", err);
+      return res.status(500).send("Ошибка сервера при выходе");
+    }
+  }
+
+  // Редирект или сообщение
+  res.json({ redirectTo: "/" });
 });
 
 // Проверка подключения к БД и запуск сервера
@@ -244,9 +296,9 @@ async function startServer() {
   try {
     await db.query("SELECT 1");
     console.log("✅ Подключение к базе данных прошло успешно.");
-    app.listen(PORT, '0.0.0.0', () => {
+    app.listen(PORT, "0.0.0.0", () => {
       console.log(`🚀 Сервер работает: http://localhost:${PORT}`);
-    });    
+    });
   } catch (err) {
     console.error("❌ Ошибка подключения к базе данных:", err.message);
     process.exit(1);
