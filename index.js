@@ -12,6 +12,7 @@ const { format } = require("date-fns-tz");
 const app = express();
 const PORT = 80;
 
+
 // Настройка хранилища для аватаров
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -193,7 +194,7 @@ app.post("/verify-code", async (req, res) => {
       maxAge: 604800000,
     });
     fs.appendFile("user_actions.log", `[${new Date().toISOString()}] Успешная регистрация: ${email}\n`, () => {});
-    return res.redirect("/");
+    return res.redirect("/profile");
   } else if (purpose === "login") {
     const [userRows] = await db.query("SELECT id FROM users WHERE email = ?", [
       email,
@@ -213,7 +214,7 @@ app.post("/verify-code", async (req, res) => {
       maxAge: 604800000,
     });
     fs.appendFile("user_actions.log", `[${new Date().toISOString()}] Успешный вход: ${email}\n`, () => {});
-    return res.redirect("/");
+    return res.redirect("/profile");
   }
 });
 
