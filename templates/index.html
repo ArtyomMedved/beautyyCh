@@ -638,7 +638,7 @@
           card.className = "course-card";
           card.dataset.category = course.category || "all";
           card.dataset.duration = String(course.duration || "0");
-          const baseURL = "http://localhost:3000";
+          const baseURL = window.location.origin;
 
           card.innerHTML = `
       <img src="${
