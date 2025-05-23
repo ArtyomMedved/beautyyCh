@@ -1,0 +1,205 @@
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>О школе - beautyyCh</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Montserrat", sans-serif;
+        background-color: #fff1f3;
+        color: #831843;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        box-sizing: border-box;
+      }
+      header {
+        border-bottom: 1px solid #f9a8d4;
+        background-color: #ffe4ec;
+      }
+      header .header-container {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 60px;
+        flex-wrap: wrap;
+      }
+      header .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: #831843;
+        user-select: none;
+        text-decoration: none;
+        flex-shrink: 0;
+      }
+      header .logo img {
+        height: 40px;
+        width: auto;
+      }
+      nav.main-nav {
+        display: flex;
+        gap: 1.5rem;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+      nav.main-nav a {
+        color: #831843;
+        font-weight: 600;
+        font-size: 0.875rem;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+      nav.main-nav a:hover {
+        color: #9d174d;
+      }
+      main {
+        max-width: 900px;
+        margin: 2rem auto 4rem;
+        padding: 0 1rem;
+        box-sizing: border-box;
+      }
+      h1 {
+        font-weight: 800;
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: #831843;
+        text-shadow: 1px 1px 4px rgba(157, 23, 77, 0.5);
+      }
+      .intro-text {
+        font-size: 1.25rem;
+        color: #9d174d;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+      }
+      .section {
+        margin-bottom: 2.5rem;
+      }
+      .section-title {
+        font-weight: 700;
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+        color: #831843;
+        border-bottom: 2px solid #9d174d;
+        padding-bottom: 0.25rem;
+        max-width: max-content;
+      }
+      .section-content {
+        font-size: 1.125rem;
+        color: #9d174d;
+        line-height: 1.6;
+      }
+      .founder-section {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        background-color: #fff0f6;
+        border: 1px solid #f9a8d4;
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        box-shadow: 0 1px 6px rgba(157, 23, 77, 0.1);
+      }
+      .founder-photo {
+        width: 120px;
+        height: 120px;
+        border-radius: 9999px;
+        object-fit: cover;
+        border: 3px solid #9d174d;
+        flex-shrink: 0;
+      }
+      .founder-info h2 {
+        font-weight: 700;
+        font-size: 1.5rem;
+        margin: 0 0 0.5rem 0;
+        color: #831843;
+      }
+      .founder-info p {
+        font-size: 1.125rem;
+        color: #9d174d;
+        margin: 0;
+        line-height: 1.5;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <a class="logo" href="/">
+          <img
+            alt="Логотип школы beautyyCh"
+            class="h-10 w-auto"
+            height="40"
+            src="https://i.yapx.ru/ZGgcn.png"
+            width="120"
+          />
+          beautyyCh
+        </a>
+        <nav aria-label="Основное меню" class="main-nav">
+          <a href="./about_school"> О школе </a>
+          <a href="./Training_list.html"> Обучение </a>
+          <a href="./profile"> Профиль </a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <h1>О школе</h1>
+      <p class="intro-text">
+        Добро пожаловать в beautyyCh — современную школу маникюра, где
+        мы обучаем искусству ногтевого сервиса с практикой на моделях и
+        поддержкой лучших мастеров. Наша миссия — помочь вам стать
+        профессионалом и уверенно работать в индустрии красоты.
+      </p>
+      <section aria-labelledby="missionTitle" class="section">
+        <h2 class="section-title" id="missionTitle">Наша миссия</h2>
+        <p class="section-content">
+          Мы стремимся предоставить качественное и эффективное обучение
+          ногтевому искусству, сочетая теорию и практику, чтобы каждый студент
+          мог реализовать свой потенциал и добиться успеха в профессии.
+        </p>
+      </section>
+      <section aria-labelledby="valuesTitle" class="section">
+        <h2 class="section-title" id="valuesTitle">Наши ценности</h2>
+        <p class="section-content">
+          Профессионализм, индивидуальный подход, поддержка и постоянное
+          развитие — вот что отличает нашу школу. Мы создаем комфортную и
+          вдохновляющую атмосферу для обучения и роста.
+        </p>
+      </section>
+      <section aria-labelledby="founderTitle" class="section">
+        <h2 class="section-title" id="founderTitle">Руководитель школы</h2>
+        <div class="founder-section">
+          <img
+            alt="Фото Галиева Чулпан"
+            class="founder-photo"
+            height="120"
+            src="https://i.yapx.ru/ZGgnN.jpg"
+            width="120"
+          />
+          <div class="founder-info">
+            <h2>Галиева Чулпан</h2>
+            <p>
+              Основатель и руководитель beautyyCh, профессионал с многолетним
+              опытом в индустрии красоты, вдохновляющая и поддерживающая своих
+              студентов на пути к успеху.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

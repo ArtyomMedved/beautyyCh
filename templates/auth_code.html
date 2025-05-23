@@ -141,10 +141,11 @@
       <div class="header-container">
         <a class="logo" href="/">
           <img
-            alt="Логотип beautyyCh"
-            src="https://storage.googleapis.com/a1aa/image/2676523a-fcdf-43bb-877a-218bba33b8ba.jpg"
-            width="120"
+            alt="Логотип школы beautyyCh"
+            class="h-10 w-auto"
             height="40"
+            src="https://i.yapx.ru/ZGgcn.png"
+            width="120"
           />
           beautyyCh
         </a>
@@ -237,32 +238,34 @@
       });
     </script>
     <script>
-      document.querySelector("form").addEventListener("submit", async (event) => {
-        event.preventDefault();
-    
-        const code = [...document.querySelectorAll(".code-inputs input")]
-          .map((i) => i.value)
-          .join("");
-    
-        const urlParams = new URLSearchParams(window.location.search);
-        const email = urlParams.get("email");
-        const purpose = urlParams.get("purpose");
-        const name = urlParams.get("name");
-        const password = urlParams.get("password");
-    
-        const res = await fetch("/verify-code", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ code, email, purpose, name, password }),
+      document
+        .querySelector("form")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
+
+          const code = [...document.querySelectorAll(".code-inputs input")]
+            .map((i) => i.value)
+            .join("");
+
+          const urlParams = new URLSearchParams(window.location.search);
+          const email = urlParams.get("email");
+          const purpose = urlParams.get("purpose");
+          const name = urlParams.get("name");
+          const password = urlParams.get("password");
+
+          const res = await fetch("/verify-code", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ code, email, purpose, name, password }),
+          });
+
+          if (res.ok) {
+            const data = await res.json();
+            window.location.href = data.redirectTo;
+          } else {
+            alert("Неверный код");
+          }
         });
-    
-        if (res.ok) {
-          const data = await res.json();
-          window.location.href = data.redirectTo;
-        } else {
-          alert("Неверный код");
-        }
-      });
-    </script>    
+    </script>
   </body>
 </html>

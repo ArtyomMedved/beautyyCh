@@ -12,6 +12,12 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&amp;display=swap"
       rel="stylesheet"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+      rel="stylesheet"
+    />
     <style>
       body {
         font-family: "Montserrat", sans-serif;
@@ -137,13 +143,27 @@
         margin-right: 0.75rem;
         margin-top: 0.25rem;
       }
+      .courses-grid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1.5rem;
+      }
+      @media (min-width: 640px) {
+        .courses-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (min-width: 1024px) {
+        .courses-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
       .course-card {
         border: 1px solid #f9a8d4;
         border-radius: 0.5rem;
         background-color: #fff0f6;
         box-shadow: 0 1px 3px rgba(157, 23, 77, 0.1);
         overflow: hidden;
-        position: relative;
         display: flex;
         flex-direction: column;
         max-width: 100%;
@@ -156,7 +176,7 @@
         display: block;
       }
       .course-card-content {
-        padding: 1.25rem;
+        padding: 1rem 1.25rem 1.5rem 1.25rem;
         flex-grow: 1;
         display: flex;
         flex-direction: column;
@@ -177,11 +197,7 @@
         color: #f43f5e;
         font-weight: 700;
         font-size: 1.125rem;
-        margin-bottom: 1rem;
-      }
-      .course-card-content .btn-group {
-        display: flex;
-        gap: 0.75rem;
+        margin-bottom: 0.75rem;
       }
       .btn-enroll {
         background-color: #9d174d;
@@ -191,8 +207,9 @@
         border-radius: 0.375rem;
         border: none;
         cursor: pointer;
-        flex: 1;
+        font-size: 1rem;
         transition: background-color 0.3s;
+        width: 100%;
       }
       .btn-enroll:hover {
         background-color: #be185d;
@@ -418,15 +435,14 @@
                 alt="Логотип школы beautyyCh"
                 class="h-10 w-auto"
                 height="40"
-                src="https://storage.googleapis.com/a1aa/image/2676523a-fcdf-43bb-877a-218bba33b8ba.jpg"
+                src="https://i.yapx.ru/ZGgcn.png"
                 width="120"
               />
               <span class="select-none text-2xl font-bold">beautyyCh</span>
             </a>
             <nav>
-              <a href="#"> О школе </a>
-              <a href="#"> Обучение </a>
-              <a href="#"> Расписание </a>
+              <a href="../about_school">О школе</a>
+              <a href="../Training_list">Обучение</a>
             </nav>
           </div>
           <div class="header-right text-sm">
@@ -435,45 +451,74 @@
               class="desktop-auth"
               style="display: flex; gap: 1rem; align-items: center"
             >
-              <a href="/login">
-                <button class="btn-login" type="button">Войти</button>
-              </a>
-              <a href="/register">
-                <button class="btn-register" type="button">Регистрация</button>
-              </a>
+              <!-- Для неавторизованных -->
+              <div id="auth-buttons">
+                <a href="./login">Войти</a>
+                <span>/</span>
+                <a href="./register">Регистрация</a>
+              </div>
+
+              <!-- Для авторизованных -->
+              <div
+                id="user-info"
+                style="display: none"
+                class="flex items-center gap-3"
+              >
+                <a href="./profile">
+                  <img
+                    id="user-avatar"
+                    src=""
+                    alt="Avatar"
+                    width="40"
+                    height="40"
+                    class="rounded-full"
+                  />
+                </a>
+                <a href="./profile">
+                  <span
+                    id="user-name"
+                    class="text-sm font-semibold text-rose-900 whitespace-nowrap"
+                  >
+                    <!-- Имя пользователя подгружается сюда -->
+                  </span>
+                </a>
+                <button
+                  id="logout-btn"
+                  class="text-sm text-rose-600 hover:text-rose-800"
+                >
+                  Выйти
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </header>
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 mb-20">
-      <section class="flex flex-col md:flex-row md:items-center md:space-x-12">
+      <section class="flex flex-col md:flex-row items-center justify-center md:space-x-12 text-center px-4">
         <div class="md:flex-1 max-w-md mx-auto md:mx-0">
-          <h1 class="text-5xl font-extrabold text-center mt-10">
+          <h1 class="text-5xl font-extrabold mt-10">
             <span class="block">ШКОЛА</span>
             <span class="block">БЬЮТИ</span>
             <br />
           </h1>
-          <p>
+          <p class="mt-4">
             Эффективное обучение с практикой на моделях и курс от лучших
             мастеров маникюра
           </p>
-          <div class="flex space-x-4 mb-8 flex-wrap">
-            <button class="btn-primary" type="button">Расписание</button>
-            <button class="btn-secondary" type="button">Все курсы</button>
-          </div>
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-sm">
-            <div class="info-icons flex items-start">
+          <br />
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-sm text-left mt-6">
+            <div class="info-icons flex items-start gap-2">
               <i class="fas fa-briefcase mt-1"></i>
               <p>Практика на реальных клиентах, поддержка после обучения</p>
             </div>
-            <div class="info-icons flex items-start">
+            <div class="info-icons flex items-start gap-2">
               <i class="fas fa-user-tie mt-1"></i>
               <p>
                 100% выпускников – это практикующие мастера ногтевого сервиса
               </p>
             </div>
-            <div class="info-icons flex items-start">
+            <div class="info-icons flex items-start gap-2">
               <i class="fas fa-graduation-cap mt-1"></i>
               <p>
                 Дипломы соответствуют требованиям рынка труда и дают право
@@ -484,14 +529,14 @@
         </div>
         <div class="relative mt-10 md:mt-0 md:flex-1 max-w-md mx-auto md:mx-0">
           <img
-            alt="Фото обучения маникюру с тремя женщинами, одна обучает двух других"
+            alt="Фото Чулпан с цветами"
             class="rounded-lg shadow-lg w-full h-auto object-cover"
             height="400"
-            src="https://storage.googleapis.com/a1aa/image/53c5348a-909f-4f84-2e62-5c21e9aa5f80.jpg"
+            src="https://i.yapx.ru/ZGgo8.jpg"
             width="400"
           />
         </div>
-      </section>
+      </section>      
       <section class="mt-16 max-w-4xl mx-auto">
         <h2>Ближайшие старты курсов школы маникюра:</h2>
         <div class="space-y-4">
@@ -500,12 +545,10 @@
           >
             <div class="mb-3 sm:mb-0">
               <p class="title">Курсы бьюти</p>
-              <p>Старт: 15.05.2024, 3 месяца</p>
-              <p>Формат: очно</p>
+              <p>Старт: 15.05.2026, 3 месяца</p>
             </div>
             <div class="flex items-center space-x-6">
-              <p class="price">6 300 ₽ / мес.</p>
-              <button type="button">Забронировать</button>
+              <p class="price">6 300 ₽</p>
             </div>
           </div>
           <div
@@ -513,12 +556,10 @@
           >
             <div class="mb-3 sm:mb-0">
               <p class="title">Обучение на мастера ногтевого сервиса</p>
-              <p>Старт: 01.06.2024, 2 месяца</p>
-              <p>Формат: очно</p>
+              <p>Старт: 01.06.2026, 2 месяца</p>
             </div>
             <div class="flex items-center space-x-6">
-              <p class="price">3 700 ₽ / мес.</p>
-              <button type="button">Забронировать</button>
+              <p class="price">3 700 ₽</p>
             </div>
           </div>
           <div
@@ -526,252 +567,199 @@
           >
             <div class="mb-3 sm:mb-0">
               <p class="title">Курсы повышения квалификации</p>
-              <p>Старт: 10.06.2024, 1 месяц</p>
-              <p>Формат: очно</p>
+              <p>Старт: 10.06.2026, 1 месяц</p>
             </div>
             <div class="flex items-center space-x-6">
-              <p class="price">9 200 ₽ / мес.</p>
-              <button type="button">Забронировать</button>
+              <p class="price">9 200 ₽</p>
             </div>
           </div>
         </div>
       </section>
       <section class="mt-20 max-w-7xl mx-auto">
         <h2>Все программы обучения школы маникюра</h2>
-        <div
-          class="flex flex-col sm:flex-row sm:space-x-6 mb-8 space-y-4 sm:space-y-0 max-w-4xl mx-auto"
+        <!-- Убираем блок фильтров полностью -->
+        <section
+          aria-label="Список курсов"
+          class="courses-grid"
+          id="coursesGrid"
         >
-          <select aria-label="Типовая программа">
-            <option>Бьюти</option>
-            <option>Программа 1</option>
-            <option>Программа 2</option>
-          </select>
-          <select aria-label="Цель обучения">
-            <option>Цель обучения</option>
-            <option>Цель 1</option>
-            <option>Цель 2</option>
-          </select>
-          <select aria-label="Длительность обучения">
-            <option>Длительность обучения</option>
-            <option>1 месяц</option>
-            <option>2 месяца</option>
-          </select>
-        </div>
-        <div
-          aria-label="Программы обучения"
-          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto"
-        >
-          <!-- Card 1 -->
-          <article class="course-card">
-            <img
-              alt="Фото мастера маникюра за работой с клиентом"
-              height="220"
-              src="https://storage.googleapis.com/a1aa/image/b524fbed-ceaf-4d6d-2b6b-c54e6d7192ea.jpg"
-              width="400"
-            />
-            <div class="course-card-content">
-              <h3>Мастер маникюра</h3>
-              <p>
-                Обучение базовым техникам маникюра, уходу за ногтями и кожи рук,
-                а также работе с инструментами.
-              </p>
-              <p class="price">3 700 ₽ / мес.</p>
-              <div class="btn-group">
-                <button class="btn-enroll" type="button">Записаться</button>
-                <button class="btn-program" type="button">
-                  Программа обучения
-                </button>
-              </div>
-            </div>
-          </article>
-          <!-- Card 2 -->
-          <article class="course-card">
-            <img
-              alt="Фото мастера универсала ногтевого сервиса с инструментами"
-              height="220"
-              src="https://storage.googleapis.com/a1aa/image/155cb3e0-b6c2-464e-021e-5e8778a690d3.jpg"
-              width="400"
-            />
-            <div class="course-card-content">
-              <h3>Мастер-универсал ногтевого сервиса</h3>
-              <p>
-                Комплексное обучение маникюру, педикюру, наращиванию ногтей и
-                дизайну.
-              </p>
-              <p class="price">5 000 ₽ / мес.</p>
-              <div class="btn-group">
-                <button class="btn-enroll" type="button">Записаться</button>
-                <button class="btn-program" type="button">
-                  Программа обучения
-                </button>
-              </div>
-            </div>
-          </article>
-          <!-- Card 3 -->
-          <article class="course-card">
-            <img
-              alt="Фото специалиста технологий ногтевого сервиса с инструментами"
-              height="220"
-              src="https://storage.googleapis.com/a1aa/image/e96a0052-b3fd-493e-5da7-2ac42816ef6f.jpg"
-              width="400"
-            />
-            <div class="course-card-content">
-              <h3>Специалист технологий ногтевого сервиса</h3>
-              <p>
-                Обучение современным технологиям и материалам в ногтевом
-                сервисе.
-              </p>
-              <p class="price">7 600 ₽ / мес.</p>
-              <div class="btn-group">
-                <button class="btn-enroll" type="button">Записаться</button>
-                <button class="btn-program" type="button">
-                  Программа обучения
-                </button>
-              </div>
-            </div>
-          </article>
-          <!-- Card 4 -->
-          <article class="course-card">
-            <img
-              alt="Фото курсов маникюра для начинающих с инструментами и моделями"
-              height="220"
-              src="https://storage.googleapis.com/a1aa/image/da1f0d22-390e-4fa4-b21e-7e0681d66f36.jpg"
-              width="400"
-            />
-            <div class="course-card-content">
-              <h3>Курсы маникюра для начинающих</h3>
-              <p>
-                Основы маникюра, уход за ногтями и кожи рук, базовые техники.
-              </p>
-              <p class="price">9 200 ₽</p>
-              <div class="btn-group">
-                <button class="btn-enroll" type="button">Записаться</button>
-                <button class="btn-program" type="button">
-                  Программа обучения
-                </button>
-              </div>
-            </div>
-          </article>
-          <!-- Card 5 -->
-          <article class="course-card">
-            <img
-              alt="Фото курсов повышения квалификации по маникюру с мастером и клиентом"
-              height="220"
-              src="https://storage.googleapis.com/a1aa/image/2c9a534f-eae9-4150-948e-b71398c92b01.jpg"
-              width="400"
-            />
-            <div class="course-card-content">
-              <h3>Курсы повышения квалификации по маникюру</h3>
-              <p>
-                Современные техники и тренды в маникюре, работа с новыми
-                материалами.
-              </p>
-              <p class="price">6 000 ₽</p>
-              <div class="btn-group">
-                <button class="btn-enroll" type="button">Записаться</button>
-                <button class="btn-program" type="button">
-                  Программа обучения
-                </button>
-              </div>
-            </div>
-          </article>
-          <!-- Card 6 -->
-          <article class="course-card">
-            <img
-              alt="Фото курсов дизайна ногтей с мастером и образцами дизайна"
-              height="220"
-              src="https://storage.googleapis.com/a1aa/image/fbdc558b-0cee-4c26-5c1a-22d40ec05653.jpg"
-              width="400"
-            />
-            <div class="course-card-content">
-              <h3>Курсы дизайна ногтей</h3>
-              <p>
-                Обучение современным техникам дизайна ногтей, включая роспись и
-                декор.
-              </p>
-              <p class="price">6 000 ₽</p>
-              <div class="btn-group">
-                <button class="btn-enroll" type="button">Записаться</button>
-                <button class="btn-program" type="button">
-                  Программа обучения
-                </button>
-              </div>
-            </div>
-          </article>
-          <!-- Card 7 -->
-          <article class="course-card">
-            <img
-              alt="Фото курсов педикюра с мастером и клиентом"
-              height="220"
-              src="https://storage.googleapis.com/a1aa/image/62128cd5-58e8-4065-6e7d-544f7606a360.jpg"
-              width="400"
-            />
-            <div class="course-card-content">
-              <h3>Курсы педикюра</h3>
-              <p>
-                Обучение профессиональному уходу за ногами и ногтями, аппаратным
-                и классическим педикюром.
-              </p>
-              <p class="price">6 300 ₽</p>
-              <div class="btn-group">
-                <button class="btn-enroll" type="button">Записаться</button>
-                <button class="btn-program" type="button">
-                  Программа обучения
-                </button>
-              </div>
-            </div>
-          </article>
-          <!-- Card 8 -->
-          <article class="course-card">
-            <img
-              alt="Фото курсов наращивания ногтей с мастером и клиентом"
-              height="220"
-              src="https://storage.googleapis.com/a1aa/image/123a6442-0107-4094-cab2-9d9e70974e69.jpg"
-              width="400"
-            />
-            <div class="course-card-content">
-              <h3>Курсы наращивания ногтей</h3>
-              <p>
-                Обучение техникам наращивания ногтей гелем и акрилом, коррекции
-                и дизайну.
-              </p>
-              <p class="price">7 200 ₽</p>
-              <div class="btn-group">
-                <button class="btn-enroll" type="button">Записаться</button>
-                <button class="btn-program" type="button">
-                  Программа обучения
-                </button>
-              </div>
-            </div>
-          </article>
-        </div>
+          <!-- Карточки курсов будут подгружаться сюда через JS -->
+        </section>
       </section>
       <section class="help-section">
         <div>
-          <h3 style="color: #fff0f6;">НУЖНА ПОМОЩЬ В ПОДБОРЕ КУРСА?</h3>
-          <p style="color: #fff0f6;">
+          <h3 style="color: #fff0f6">НУЖНА ПОМОЩЬ В ПОДБОРЕ КУРСА?</h3>
+          <p style="color: #fff0f6">
             Обсудите ваши пожелания с карьерным консультантом. Наш эксперт в
             индустрии красоты бесплатно поможет подобрать обучение, которое
             соответствует вашим целям.
           </p>
         </div>
-        <form onsubmit="event.preventDefault()">
+        <form id="consultation-form">
           <input
             aria-label="Ваше имя"
             placeholder="Ваше имя"
-            required=""
+            required
             type="text"
+            id="name"
           />
           <input
             aria-label="Ваш телефон"
-            pattern="\+7\s\d{3}\s\d{3}-\d{2}-\d{2}"
             placeholder="+7 912 345-67-89"
-            required=""
-            type="tel"
+            required
+            type="text"
+            id="phone"
           />
           <button type="submit">Записаться на консультацию</button>
         </form>
       </section>
     </main>
+    <script>
+      const coursesGrid = document.getElementById("coursesGrid");
+      let courses = []; // сюда загрузим курсы из API
+
+      // Функция рендеринга курсов в DOM
+      function truncateText(text, maxLength) {
+        return text.length > maxLength
+          ? text.slice(0, maxLength) + "..."
+          : text;
+      }
+
+      function renderCourses(courseList) {
+        coursesGrid.innerHTML = ""; // очистить контейнер
+
+        if (courseList.length === 0) {
+          coursesGrid.innerHTML = "<p>Курсы не найдены.</p>";
+          return;
+        }
+
+        courseList.forEach((course) => {
+          const card = document.createElement("article");
+          card.className = "course-card";
+          card.dataset.category = course.category || "all";
+          card.dataset.duration = String(course.duration || "0");
+          const baseURL = "http://localhost:3000";
+
+          card.innerHTML = `
+      <img src="${
+        course.mainImage
+          ? baseURL + course.mainImage
+          : "https://via.placeholder.com/320x176?text=No+Image"
+      }" alt="${course.title || "Курс"}" width="320" height="176"/>
+      <div class="course-card-content">
+        <h3>${course.title}</h3>
+        <p>${truncateText(course.description || "", 200)}</p>
+        <div class="price">${course.price ? course.price + " ₽" : ""}</div>
+        <a href="./Training_list">
+        <button class="btn-enroll" type="button" aria-label="Записаться на курс ${
+          course.title
+        }">Купить</button>
+        </a>
+      </div>
+    `;
+
+          coursesGrid.appendChild(card);
+        });
+      }
+
+      // Загрузка курсов с API
+      async function loadCourses() {
+        try {
+          const response = await fetch("/api/demo-courses");
+          if (!response.ok) throw new Error("Ошибка загрузки данных");
+
+          courses = await response.json();
+          renderCourses(courses); // просто отображаем все курсы без фильтрации
+        } catch (error) {
+          coursesGrid.innerHTML = `<p>Не удалось загрузить курсы: ${error.message}</p>`;
+        }
+      }
+
+      // Инициализация
+      loadCourses();
+    </script>
+    <script>
+      // При загрузке страницы проверяем сессию
+      window.addEventListener("DOMContentLoaded", () => {
+        fetch("/api/profile", {
+          credentials: "include",
+        })
+          .then((res) => {
+            if (!res.ok) throw new Error("Не авторизован");
+            return res.json();
+          })
+          .then((user) => {
+            // Скрываем кнопки Войти/Регистрация
+            document.getElementById("auth-buttons").style.display = "none";
+
+            // Показываем имя и аватар
+            document.getElementById("user-info").style.display = "flex";
+            document.getElementById("user-avatar").src = user.avatar;
+            document.getElementById("user-name").textContent = user.name;
+          })
+          .catch((err) => {
+            // Оставляем кнопки авторизации
+            console.log("Пользователь не авторизован");
+          });
+
+        // Обработка выхода
+        document.getElementById("logout-btn").addEventListener("click", () => {
+          fetch("/logout", {
+            method: "POST",
+            credentials: "include",
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              window.location.href = data.redirectTo || "/";
+            })
+            .catch((err) => {
+              console.error("Ошибка при выходе:", err);
+            });
+        });
+      });
+    </script>
+    <script>
+      const form = document.getElementById("consultation-form");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const name = form.name.value.trim();
+        const phone = form.phone.value.trim();
+        const phonePattern = /^\+7\s\d{3}\s\d{3}-\d{2}-\d{2}$/;
+
+        if (!name) {
+          alert("Пожалуйста, введите ваше имя");
+          return;
+        }
+
+        if (!phonePattern.test(phone)) {
+          alert(
+            "Пожалуйста, введите номер телефона в формате +7 912 345-67-89"
+          );
+          return;
+        }
+
+        try {
+          const res = await fetch("/send-consultation", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, phone }),
+          });
+
+          const data = await res.json();
+
+          if (data.success) {
+            alert("Запрос успешно отправлен!");
+            form.reset();
+          } else {
+            alert("Ошибка при отправке запроса, попробуйте позже.");
+          }
+        } catch (error) {
+          alert("Ошибка сети. Попробуйте позже.");
+          console.error(error);
+        }
+      });
+    </script>
   </body>
 </html>

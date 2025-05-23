@@ -1,0 +1,262 @@
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>Мастер маникюра - beautyyCh</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Montserrat", sans-serif;
+        background-color: #fff1f3;
+        color: #831843;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        box-sizing: border-box;
+      }
+      header {
+        border-bottom: 1px solid #f9a8d4;
+        background-color: #ffe4ec;
+      }
+      header .header-container {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 60px;
+        flex-wrap: wrap;
+      }
+      header .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: #831843;
+        user-select: none;
+        text-decoration: none;
+        flex-shrink: 0;
+      }
+      header .logo img {
+        height: 40px;
+        width: auto;
+      }
+      nav.main-nav {
+        display: flex;
+        gap: 1.5rem;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+      nav.main-nav a {
+        color: #831843;
+        font-weight: 600;
+        font-size: 0.875rem;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+      nav.main-nav a:hover {
+        color: #9d174d;
+      }
+      main {
+        max-width: 720px;
+        margin: 2rem auto 4rem;
+        padding: 0 1rem;
+        box-sizing: border-box;
+        text-align: center;
+      }
+      h1 {
+        font-weight: 800;
+        font-size: 3rem;
+        margin-bottom: 0.5rem;
+        color: #831843;
+        text-shadow: 1px 1px 4px rgba(157, 23, 77, 0.5);
+      }
+      .course-subtitle {
+        font-size: 1.25rem;
+        color: #9d174d;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+      }
+      .video-wrapper {
+        position: relative;
+        padding-top: 56.25%;
+        border-radius: 0.75rem;
+        overflow: hidden;
+        box-shadow: 0 6px 15px rgba(157, 23, 77, 0.3);
+        background-color: black;
+        margin-bottom: 2rem;
+      }
+      .video-wrapper iframe,
+      .video-wrapper video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-radius: 0.75rem;
+      }
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+      .gallery img {
+        width: 100%;
+        border-radius: 0.75rem;
+        object-fit: cover;
+        height: 160px;
+        box-shadow: 0 4px 12px rgba(157, 23, 77, 0.2);
+        transition: transform 0.3s ease;
+        cursor: pointer;
+      }
+      .gallery img:hover {
+        transform: scale(1.05);
+      }
+      .course-details {
+        font-size: 1.125rem;
+        color: #9d174d;
+        line-height: 1.6;
+        border-top: 1px solid #f9a8d4;
+        padding-top: 1rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left;
+      }
+      .section-title {
+        font-weight: 700;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: #831843;
+        border-bottom: 2px solid #9d174d;
+        padding-bottom: 0.25rem;
+        max-width: max-content;
+      }
+      .features-list {
+        list-style: none;
+        padding-left: 0;
+        margin-top: 0.5rem;
+      }
+      .features-list li {
+        margin-bottom: 0.5rem;
+        padding-left: 1.5rem;
+        position: relative;
+        color: #9d174d;
+      }
+      .features-list li::before {
+        content: "\f00c";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: #f43f5e;
+        font-size: 1rem;
+        line-height: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <a class="logo" href="/">
+          <img
+            alt="Логотип школы beautyyCh"
+            class="h-10 w-auto"
+            height="40"
+            src="https://i.yapx.ru/ZGgcn.png"
+            width="120"
+          />
+          beautyyCh
+        </a>
+        <nav class="main-nav" aria-label="Основное меню">
+          <a href="../about_school">О школе</a>
+          <a href="../Training_list">Обучение</a>
+          <a href="../profile"> Профиль </a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <h1>Мастер маникюра</h1>
+      <p class="course-subtitle">
+        Освойте базовые и продвинутые техники маникюра, уход за ногтями и кожей
+        рук, а также работу с профессиональными инструментами. Курс идеально
+        подходит для начинающих и тех, кто хочет повысить квалификацию.
+      </p>
+      <section aria-label="Демонстрационное видео курса" class="video-wrapper">
+        <video
+          controls
+          poster="https://placehold.co/600x338?text=Демо+видео+курса"
+          preload="metadata"
+          aria-describedby="videoDesc"
+        >
+          <source
+            src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm"
+            type="video/webm"
+          />
+          <source
+            src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+            type="video/mp4"
+          />
+          Ваш браузер не поддерживает видео.
+        </video>
+        <p class="sr-only" id="videoDesc">
+          Демонстрационное видео курса мастер маникюра
+        </p>
+      </section>
+      <section aria-label="Галерея работ" class="gallery" tabindex="0">
+        <img
+          alt="Пример работы маникюра 1"
+          height="160"
+          src="https://storage.googleapis.com/a1aa/image/47e0b304-47d5-4e73-cefe-8d72c6bb7e44.jpg"
+          width="300"
+          loading="lazy"
+        />
+        <img
+          alt="Пример работы маникюра 2"
+          height="160"
+          src="https://storage.googleapis.com/a1aa/image/77ed2409-300f-4043-ee14-8250aa481ae5.jpg"
+          width="300"
+          loading="lazy"
+        />
+        <img
+          alt="Пример работы маникюра 3"
+          height="160"
+          src="https://storage.googleapis.com/a1aa/image/7f63b1f1-a3bb-4bf2-daef-73edb994238a.jpg"
+          width="300"
+          loading="lazy"
+        />
+        <img
+          alt="Пример работы маникюра 4"
+          height="160"
+          src="https://storage.googleapis.com/a1aa/image/84f3cd5e-3347-4e29-ea8b-4af135ef8dda.jpg"
+          width="300"
+          loading="lazy"
+        />
+      </section>
+      <section class="course-details" aria-label="Подробности курса">
+        <h2 class="section-title">Что вы получите</h2>
+        <ul class="features-list">
+          <li>Профессиональные навыки маникюра и ухода за ногтями</li>
+          <li>Практика на моделях и реальных клиентах</li>
+          <li>Знания по работе с инструментами и материалами</li>
+          <li>Диплом, подтверждающий квалификацию</li>
+          <li>Поддержка и консультации после окончания курса</li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>

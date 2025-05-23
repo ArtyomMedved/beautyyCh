@@ -202,17 +202,18 @@
       <div class="header-container">
         <a class="logo" href="/">
           <img
-            alt="Логотип beautyyCh"
+            alt="Логотип школы beautyyCh"
+            class="h-10 w-auto"
             height="40"
-            src="https://storage.googleapis.com/a1aa/image/2676523a-fcdf-43bb-877a-218bba33b8ba.jpg"
+            src="https://i.yapx.ru/ZGgcn.png"
             width="120"
           />
           beautyyCh
         </a>
         <nav class="main-nav" aria-label="Основное меню">
-          <a href="#">О школе</a>
-          <a href="#">Обучение</a>
-          <a href="#">Расписание</a>
+          <a href="./about_school">О школе</a>
+          <a href="./Training_list">Обучение</a>
+          <a href="./profile"> Профиль </a>
         </nav>
       </div>
     </header>
@@ -252,58 +253,67 @@
       </section>
       <section aria-label="Список купленных курсов" class="courses-section">
         <h2>Мои курсы</h2>
-        <div class="courses-grid">
-          <article class="course-card">
-            <img
-              alt="Фото мастера маникюра за работой с клиентом"
-              height="176"
-              src="https://storage.googleapis.com/a1aa/image/b524fbed-ceaf-4d6d-2b6b-c54e6d7192ea.jpg"
-              width="320"
-            />
-            <div class="course-card-content">
-              <h3>Мастер маникюра</h3>
-              <p>
-                Обучение базовым техникам маникюра, уходу за ногтями и кожи рук,
-                а также работе с инструментами.
-              </p>
-              <p class="price">3 700 ₽ / мес.</p>
-            </div>
-          </article>
-          <article class="course-card">
-            <img
-              alt="Фото курсов дизайна ногтей с мастером и образцами дизайна"
-              height="176"
-              src="https://storage.googleapis.com/a1aa/image/fbdc558b-0cee-4c26-5c1a-22d40ec05653.jpg"
-              width="320"
-            />
-            <div class="course-card-content">
-              <h3>Курсы дизайна ногтей</h3>
-              <p>
-                Обучение современным техникам дизайна ногтей, включая роспись и
-                декор.
-              </p>
-              <p class="price">6 000 ₽</p>
-            </div>
-          </article>
-          <article class="course-card">
-            <img
-              alt="Фото курсов повышения квалификации по маникюру с мастером и клиентом"
-              height="176"
-              src="https://storage.googleapis.com/a1aa/image/2c9a534f-eae9-4150-948e-b71398c92b01.jpg"
-              width="320"
-            />
-            <div class="course-card-content">
-              <h3>Курсы повышения квалификации по маникюру</h3>
-              <p>
-                Современные техники и тренды в маникюре, работа с новыми
-                материалами.
-              </p>
-              <p class="price">6 000 ₽</p>
-            </div>
-          </article>
-        </div>
+        <div class="courses-grid"></div>
       </section>
     </main>
+    <script>
+      function truncateText(text, maxLength) {
+        if (text.length > maxLength) {
+          return text.slice(0, maxLength) + "...";
+        }
+        return text;
+      }
+
+      async function loadUserCourses(userId) {
+        try {
+          const res = await fetch(`/api/user-courses/${userId}`, {
+            credentials: "include",
+          });
+          if (!res.ok) throw new Error("Ошибка при получении курсов");
+
+          const courses = await res.json();
+          const coursesGrid = document.querySelector(".courses-grid");
+          coursesGrid.innerHTML = ""; // очищаем старые карточки
+
+          if (courses.length === 0) {
+            coursesGrid.innerHTML =
+              '<p class="no-courses">У вас пока нет купленных курсов.</p>';
+            return;
+          }
+
+          function truncateText(text, maxLength) {
+            if (text.length > maxLength) {
+              return text.slice(0, maxLength) + "...";
+            }
+            return text;
+          }
+
+          courses.forEach((course) => {
+            const card = document.createElement("article");
+            card.className = "course-card cursor-pointer";
+            card.onclick = () => {
+              window.location.href = `../my_course/${course.id}`;
+            };
+            card.innerHTML = `
+    <img
+      alt="Изображение курса"
+      height="176"
+      src="${course.mainImage || "/images/placeholder.png"}"
+      width="320"
+    />
+    <div class="course-card-content">
+      <h3>${course.title}</h3>
+      <p>${truncateText(course.description, 150)}</p>
+      <p class="price">${course.price.toLocaleString()} ₽</p>
+    </div>
+  `;
+            coursesGrid.appendChild(card);
+          });
+        } catch (error) {
+          console.error("Ошибка при загрузке курсов:", error);
+        }
+      }
+    </script>
     <script>
       async function loadProfile() {
         try {
@@ -321,22 +331,35 @@
           document.querySelector(".profile-photo").src = "/" + user.avatar;
           document.querySelector(".profile-info h1").textContent = user.name;
           document.querySelector(".profile-info p").textContent = user.email;
+
+          // Если пользователь админ, добавим кнопки "Добавить курс" и "Одобрить заявки"
+          if (user.admin === 1) {
+            const actionsContainer = document.querySelector(".profile-actions");
+
+            const addCourseBtn = document.createElement("button");
+            addCourseBtn.className = "btn-action";
+            addCourseBtn.type = "button";
+            addCourseBtn.textContent = "Добавить курс";
+            addCourseBtn.onclick = () => {
+              window.location.href = "./adm_upload";
+            };
+            actionsContainer.appendChild(addCourseBtn);
+
+            const approveRequestsBtn = document.createElement("button");
+            approveRequestsBtn.className = "btn-action";
+            approveRequestsBtn.type = "button";
+            approveRequestsBtn.textContent = "Одобрить заявки";
+            approveRequestsBtn.onclick = () => {
+              window.location.href = "./requests_for_payment_approvals";
+            };
+            actionsContainer.appendChild(approveRequestsBtn);
+          }
+
+          // Теперь, когда пользователь загружен, вызываем загрузку курсов
+          loadUserCourses(user.id);
         } catch (error) {
           console.error("Ошибка при загрузке профиля:", error);
         }
-      }
-
-      function logout() {
-        fetch("/logout", {
-          method: "POST",
-          credentials: "include",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.redirectTo) {
-              window.location.href = data.redirectTo;
-            }
-          });
       }
 
       document.addEventListener("DOMContentLoaded", loadProfile);
